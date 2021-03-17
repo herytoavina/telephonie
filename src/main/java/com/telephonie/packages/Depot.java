@@ -1,4 +1,4 @@
-package com.telephonie.entities;
+package com.telephonie.packages;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.telephonie.helper.DbConnection;
 
 public class Depot {
 	private String idDepot;

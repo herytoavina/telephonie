@@ -1,4 +1,4 @@
-package com.telephonie.helper;
+package com.telephonie.packages;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
