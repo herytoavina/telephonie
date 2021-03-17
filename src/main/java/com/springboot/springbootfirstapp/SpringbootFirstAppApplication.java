@@ -1,13 +1,13 @@
-package com.telephonie.packages;
+package com.springboot.springbootfirstapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TelephonieApplication {
+public class SpringbootFirstAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TelephonieApplication.class, args);
+		SpringApplication.run(SpringbootFirstAppApplication.class, args);
 	}
 
 }

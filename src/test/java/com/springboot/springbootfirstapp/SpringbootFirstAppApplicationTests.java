@@ -1,10 +1,10 @@
-package com.telephonie.packages;
+package com.springboot.springbootfirstapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TelephonieApplicationTests {
+class SpringbootFirstAppApplicationTests {
 
 	@Test
 	void contextLoads() {

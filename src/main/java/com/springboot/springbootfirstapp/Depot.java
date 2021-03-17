@@ -1,4 +1,4 @@
-package com.telephonie.packages;
+package com.springboot.springbootfirstapp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,50 +41,21 @@ public class Depot {
 	
 	public Depot() {}
 	public Depot(String idDepot, String idUtilisateur, int montant, Timestamp dateDepot) {
-		super();
 		this.idDepot = idDepot;
 		this.idUtilisateur = idUtilisateur;
 		this.montant = montant;
 		this.dateDepot = dateDepot;
 	}
 	
-	private static final String ALL_DEPOT_ATTENTE = "select * from depot where IdDepot in (select IdDepot from depotAttente ) and IdDepot not in (select IdDepot from depotValider)";
 	private static final String INSERT_DEPOT = "insert into depot (IdUtilisateur, Montant, DateDepot) values (?, ?, CURRENT_TIMESTAMP)";
-	
-	public List<Depot> getDepotAttente() throws SQLException{
-		List<Depot> result = new ArrayList<Depot>();
-		
-		DbConnection con = new DbConnection();
-		Connection c = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet rs = null;
-		try {
-			c = con.getConnection();
-			preparedStatement = c.prepareStatement(ALL_DEPOT_ATTENTE);
-			rs = preparedStatement.executeQuery();
-			rs.next();
-			//while(rs.next()) {
-				result.add(new Depot(rs.getString("idDepot"), rs.getString("idUtilisateur"), rs.getInt("montant"), rs.getTimestamp("dateDepot")));
-			//}
-			
-		} catch (Exception ex) {
-			System.out.println(ex);
-		} finally {
-			if(c!=null) c.close();
-			if(preparedStatement!=null) preparedStatement.close();
-			if(rs!=null) rs.close();
-		}
-			
-		
-		return result;
-	}
-	
+	@SuppressWarnings("resource")
 	public void insert() throws SQLException {
-		DbConnection con = new DbConnection();
+		//String query = "insert into depot (IdUtilisateur, Montant, DateDepot) values (?, ?, CURRENT_TIMESTAMP)";
+		Connect c = new Connect();
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {		
-			conn = con.getConnection();
+			conn = c.getConnection();
 			conn.setAutoCommit(false);
 			statement = conn.prepareStatement(INSERT_DEPOT);
 			statement.setString(1, this.getIdUtilisateur());
@@ -99,5 +70,28 @@ public class Depot {
 			if(statement != null) statement.close();
 			if(conn != null) conn.close();
 		}
+		
 	}
+	
+	private static final String ALL_DEPOT_ATTENTE = "select * from depot where IdDepot in (select IdDepot from depotAttente ) and IdDepot not in (select IdDepot from depotValider)";
+	public List<Depot> depotAttente(){
+		Connect con = new Connect();
+		List<Depot> result = new ArrayList<Depot>();
+		try {
+			Connection c = con.getConnection();
+			PreparedStatement preparedStatement = c.prepareStatement(ALL_DEPOT_ATTENTE);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				result.add(new Depot(rs.getString("idDepot"), rs.getString("idUtilisateur"), rs.getInt("montant"), rs.getTimestamp("dateDepot")));
+			}
+			c.close();
+			
+		} catch (Exception ex) {
+			System.out.println(ex);
+		} finally {
+			
+		}
+		return result;
+	}
+	
 }
