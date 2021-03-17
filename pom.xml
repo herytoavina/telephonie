@@ -8,8 +8,8 @@
 		<version>2.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.springboot</groupId>
-	<artifactId>springboot-first-app</artifactId>
+	<groupId>com.telephonie</groupId>
+	<artifactId>telephonie-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springboot-first-app</name>
 	<description>Demo project for Spring Boot</description>
