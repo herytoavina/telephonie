@@ -1,4 +1,4 @@
-package com.springboot.springbootfirstapp;
+package com.springboot.springbootfirstapp.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

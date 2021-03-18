@@ -1,4 +1,4 @@
-package com.springboot.springbootfirstapp;
+package com.springboot.springbootfirstapp.controller;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.springbootfirstapp.model.Depot;
+
 import util.BuilderResponse;
 import util.Meta;
 
 
 @RestController
-@RequestMapping("/welcome")
-public class WelcomeController {
+@RequestMapping("/depot")
+public class DepotController {
 	
 	//private static final String ALL_DEPOT_ATTENTE = "select * from depot where IdDepot in (select IdDepot from depotAttente ) and IdDepot not in (select IdDepot from depotValider)";
 	
