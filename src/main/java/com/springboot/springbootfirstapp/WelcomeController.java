@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import util.BuilderResponse;
+import util.Meta;
+
 
 @RestController
 @RequestMapping("/welcome")
@@ -17,20 +20,31 @@ public class WelcomeController {
 	//private static final String ALL_DEPOT_ATTENTE = "select * from depot where IdDepot in (select IdDepot from depotAttente ) and IdDepot not in (select IdDepot from depotValider)";
 	
 	@GetMapping("/depotAttente")
-	public List<Depot> depotAttente(){
+	public BuilderResponse depotAttente(){
+		BuilderResponse response;
+		try {
 		Depot d = new Depot();
 		List<Depot> result = d.depotAttente();
-		return result;
+        response = new BuilderResponse(new Meta("200","valider"), result);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+            response= new BuilderResponse(new Meta("500","error"),null);
+		}
+		return response;
 		
 	}
 	
 	@PostMapping("/addDepot")
-	public void addDepot(@RequestBody Depot depot) {
+	public BuilderResponse addDepot(@RequestBody Depot depot) {
+		BuilderResponse response;
 		try {
 			depot.insert();
+			response = new BuilderResponse(new Meta("200","valider"), null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			response = new BuilderResponse(new Meta("500","error"), null);
 		}
+		return response;
 	}
 }
