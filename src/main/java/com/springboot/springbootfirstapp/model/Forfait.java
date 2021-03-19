@@ -7,12 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "forfait")
 public class Forfait {
+	@Id
 	private String idForfait;
+	
+	@Column(name="nom")
 	private String nom;
+	
+	@Column(name="tarif")
 	private int tarif;
+	
+	@Column(name="appel")
 	private int appel;
+	
+	@Column(name="appelautreop")
 	private int appelAutreOp;
+	
 	public String getIdForfait() {
 		return idForfait;
 	}
@@ -44,7 +61,7 @@ public class Forfait {
 		this.appelAutreOp = appelAutreOp;
 	}
 	
-	public Forfait() {}
+	public Forfait() {super();}
 	public Forfait(String idForfait, String nom, int tarif, int appel, int appelAutreOp) {
 		super();
 		this.idForfait = idForfait;
