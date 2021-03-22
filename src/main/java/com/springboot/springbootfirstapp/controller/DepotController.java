@@ -67,7 +67,7 @@ public class DepotController {
 		}
 		return response;
 	}
-	@PostMapping("/Confirmation")
+	@PostMapping("/confirmation")
 	public BuilderResponse Confirmation(@RequestParam(value="iddepot")String iddepot) {
 		BuilderResponse response;
 		Depot depot = new Depot();

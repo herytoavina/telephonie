@@ -87,7 +87,7 @@ public class Depot {
 		try {		
 			conn = c.getConnection();
 			conn.setAutoCommit(false);
-			statement = conn.prepareStatement("insert into depotvalider (iddepot) values ('"+ iddepot+"'");
+			statement = conn.prepareStatement("insert into depotvalider (iddepot) values ("+ iddepot+")");
 			statement.execute();
 			conn.commit();
 		} catch (Exception ex) {
