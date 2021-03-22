@@ -52,6 +52,9 @@ public class Depot {
 		this.montant = montant;
 	}
 	
+	public Depot(String idDepot) {
+		this.setIdDepot(idDepot);
+	}
 	
 	private static final String INSERT_DEPOT = "insert into depot (IdUtilisateur, Montant, DateDepot) values (?, ?, CURRENT_TIMESTAMP)";
 	@SuppressWarnings("resource")
@@ -80,14 +83,14 @@ public class Depot {
 	}
 	
 	@SuppressWarnings("resource")
-	public void Confirmation(String iddepot) throws SQLException {
+	public void Confirmation() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {		
 			conn = c.getConnection();
 			conn.setAutoCommit(false);
-			statement = conn.prepareStatement("insert into depotvalider (iddepot) values ('"+ iddepot+"'");
+			statement = conn.prepareStatement("insert into depotvalider (iddepot) values ("+ this.getIdDepot()+")");
 			statement.execute();
 			conn.commit();
 		} catch (Exception ex) {
