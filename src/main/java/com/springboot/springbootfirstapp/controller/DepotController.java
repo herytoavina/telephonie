@@ -71,7 +71,7 @@ public class DepotController {
 	public BuilderResponse Confirmation(@RequestBody Depot depot) {
 		BuilderResponse response;
 		try {
-			depot.Confirmation();
+			depot.confirmation();
 			response = new BuilderResponse(new Meta("200","valider"), null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -82,15 +82,17 @@ public class Depot {
 		
 	}
 	
+	private static final String INSERT_CONFIRMATION = "insert into depotvalider values (?)";
 	@SuppressWarnings("resource")
-	public void Confirmation() throws SQLException {
+	public void confirmation() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {		
 			conn = c.getConnection();
 			conn.setAutoCommit(false);
-			statement = conn.prepareStatement("insert into depotvalider (iddepot) values ("+ this.getIdDepot()+")");
+			statement = conn.prepareStatement(INSERT_CONFIRMATION);
+			statement.setString(1, this.getIdDepot());
 			statement.execute();
 			conn.commit();
 		} catch (Exception ex) {
