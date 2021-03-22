@@ -47,6 +47,12 @@ public class Depot {
 		this.dateDepot = dateDepot;
 	}
 	
+	public Depot(String idUtilisateur, int montant) {
+		this.idUtilisateur = idUtilisateur;
+		this.montant = montant;
+	}
+	
+	
 	private static final String INSERT_DEPOT = "insert into depot (IdUtilisateur, Montant, DateDepot) values (?, ?, CURRENT_TIMESTAMP)";
 	@SuppressWarnings("resource")
 	public void insert() throws SQLException {
