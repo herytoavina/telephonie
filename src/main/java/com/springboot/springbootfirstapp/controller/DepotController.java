@@ -3,6 +3,7 @@ package com.springboot.springbootfirstapp.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,7 @@ import com.springboot.springbootfirstapp.model.Depot;
 import util.BuilderResponse;
 import util.Meta;
 
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/depot")
 public class DepotController {
@@ -27,7 +28,7 @@ public class DepotController {
 		try {
 		Depot d = new Depot();
 		List<Depot> result = d.depotAttente();
-        response = new BuilderResponse(new Meta("200","valider"), result);
+        response = new BuilderResponse(new Meta("200","error"), result);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
