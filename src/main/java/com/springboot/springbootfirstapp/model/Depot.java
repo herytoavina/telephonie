@@ -94,4 +94,22 @@ public class Depot {
 		return result;
 	}
 	
+	public int getSolde(String idUtilisateur) {
+		int result = 1000;
+		Connect con = new Connect();
+		try {
+			Connection c = con.getConnection();
+			String query = "select idUtilisateur, sum(Montant) as solde from depot where IdDepot in (select IdDepot from depotValider) and idUtilisateur ="+idUtilisateur+" group by idUtilisateur";
+			PreparedStatement preparedStatement = c.prepareStatement(query);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next())result = rs.getInt("solde");
+			c.close();
+			System.out.println(query);
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return result;
+	}
 }
