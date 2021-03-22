@@ -30,7 +30,7 @@ public class DepotController {
 		try {
 		Depot d = new Depot();
 		List<Depot> result = d.depotAttente();
-        response = new BuilderResponse(new Meta("200","error"), result);
+        response = new BuilderResponse(new Meta("200","valider"), result);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
