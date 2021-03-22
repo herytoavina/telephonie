@@ -56,7 +56,7 @@ public class Depot {
 	private static final String INSERT_DEPOT = "insert into depot (IdUtilisateur, Montant, DateDepot) values (?, ?, CURRENT_TIMESTAMP)";
 	@SuppressWarnings("resource")
 	public void insert() throws SQLException {
-		//String query = "insert into depot (IdUtilisateur, Montant, DateDepot) values (?, ?, CURRENT_TIMESTAMP)";
+		
 		Connect c = new Connect();
 		Connection conn = null;
 		PreparedStatement statement = null;
@@ -67,6 +67,27 @@ public class Depot {
 			statement.setString(1, this.getIdUtilisateur());
 			statement.setInt(2, this.getMontant());
 			
+			statement.execute();
+			conn.commit();
+		} catch (Exception ex) {
+			conn.rollback();
+			System.out.println(ex);
+		} finally {
+			if(statement != null) statement.close();
+			if(conn != null) conn.close();
+		}
+		
+	}
+	
+	@SuppressWarnings("resource")
+	public void Confirmation(String iddepot) throws SQLException {
+		Connect c = new Connect();
+		Connection conn = null;
+		PreparedStatement statement = null;
+		try {		
+			conn = c.getConnection();
+			conn.setAutoCommit(false);
+			statement = conn.prepareStatement("insert into depotvalider (iddepot) values ('"+ iddepot+"'");
 			statement.execute();
 			conn.commit();
 		} catch (Exception ex) {
@@ -99,7 +120,6 @@ public class Depot {
 		}
 		return result;
 	}
-	
 	public int getSolde(String idUtilisateur) {
 		int result = 1000;
 		Connect con = new Connect();
@@ -118,4 +138,5 @@ public class Depot {
 
 		return result;
 	}
+	
 }

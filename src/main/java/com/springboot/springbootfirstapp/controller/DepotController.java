@@ -67,4 +67,17 @@ public class DepotController {
 		}
 		return response;
 	}
+	@PostMapping("/Confirmation")
+	public BuilderResponse Confirmation(@RequestParam(value="iddepot")String iddepot) {
+		BuilderResponse response;
+		Depot depot = new Depot();
+		try {
+			depot.Confirmation(iddepot);
+			response = new BuilderResponse(new Meta("200","valider"), null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			response = new BuilderResponse(new Meta("500","error"), null);
+		}
+		return response;
+	}
 }
