@@ -30,7 +30,7 @@ public class DepotController {
 		try {
 		Depot d = new Depot();
 		List<Depot> result = d.depotAttente();
-        response = new BuilderResponse(new Meta("200","error"), result);
+        response = new BuilderResponse(new Meta("200","valider"), result);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
@@ -62,6 +62,19 @@ public class DepotController {
 			 result.add(depot.getSolde(idUtilisateur));
 			response = new BuilderResponse(new Meta("200","valider"), result);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			response = new BuilderResponse(new Meta("500","error"), null);
+		}
+		return response;
+	}
+	@PostMapping("/Confirmation")
+	public BuilderResponse Confirmation(@RequestParam(value="iddepot")String iddepot) {
+		BuilderResponse response;
+		Depot depot = new Depot();
+		try {
+			depot.Confirmation(iddepot);
+			response = new BuilderResponse(new Meta("200","valider"), null);
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			response = new BuilderResponse(new Meta("500","error"), null);
 		}
