@@ -18,54 +18,121 @@ public class Forfait {
 	
 	private String nom;
 		
-	private int tarif;
+	private int duree;
+	
+	private int valeurOffre;
 	
 	private int appel;
 	
 	private int appelAutreOp;
 	
+	private int volumeMega;
+	
+	private int NbSms;
+	
 	public String getIdForfait() {
 		return idForfait;
 	}
+
 	public void setIdForfait(String idForfait) {
 		this.idForfait = idForfait;
 	}
+
 	public String getNom() {
 		return nom;
 	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public int getTarif() {
-		return tarif;
+
+	public int getDuree() {
+		return duree;
 	}
-	public void setTarif(int tarif) {
-		this.tarif = tarif;
+
+	public void setDuree(int duree) {
+		this.duree = duree;
 	}
+
+	public int getValeurOffre() {
+		return valeurOffre;
+	}
+
+	public void setValeurOffre(int valeurOffre) {
+		this.valeurOffre = valeurOffre;
+	}
+
 	public int getAppel() {
 		return appel;
 	}
+
 	public void setAppel(int appel) {
 		this.appel = appel;
 	}
+
 	public int getAppelAutreOp() {
 		return appelAutreOp;
 	}
+
 	public void setAppelAutreOp(int appelAutreOp) {
 		this.appelAutreOp = appelAutreOp;
 	}
-	
+
+	public int getVolumeMega() {
+		return volumeMega;
+	}
+
+	public void setVolumeMega(int volumeMega) {
+		this.volumeMega = volumeMega;
+	}
+
+	public int getNbSms() {
+		return NbSms;
+	}
+
+	public void setNbSms(int nbSms) {
+		NbSms = nbSms;
+	}
+
+	public static String getInsertForfait() {
+		return INSERT_FORFAIT;
+	}
+
+	public static String getAllForfait() {
+		return ALL_FORFAIT;
+	}
+
 	public Forfait() {super();}
-	public Forfait(String idForfait, String nom, int tarif, int appel, int appelAutreOp) {
+	
+	
+
+	public Forfait(String nom, int duree, int valeurOffre, int appel, int appelAutreOp,
+			int volumeMega, int nbSms) {
+		super();
+		this.nom = nom;
+		this.duree = duree;
+		this.valeurOffre = valeurOffre;
+		this.appel = appel;
+		this.appelAutreOp = appelAutreOp;
+		this.volumeMega = volumeMega;
+		this.NbSms = nbSms;
+	}
+	
+	public Forfait(String idForfait, String nom, int duree, int valeurOffre, int appel, int appelAutreOp,
+			int volumeMega, int nbSms) {
 		super();
 		this.idForfait = idForfait;
 		this.nom = nom;
-		this.tarif = tarif;
+		this.duree = duree;
+		this.valeurOffre = valeurOffre;
 		this.appel = appel;
 		this.appelAutreOp = appelAutreOp;
+		this.volumeMega = volumeMega;
+		this.NbSms = nbSms;
 	}
-	
-	private static final String INSERT_FORFAIT = "insert into forfait(Nom, tarif, Appel, AppelAutreOp) values (?, ?, ?, ?);";
+
+
+	private static final String INSERT_FORFAIT = "insert into forfait(Nom, duree, valeur_offre, appel, appelAutreOp, volume_mega, nb_sms) (?, ?, ?, ?, ?, ?, ? );";
 	public void insert() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
@@ -75,9 +142,12 @@ public class Forfait {
 			conn.setAutoCommit(false);
 			statement = conn.prepareStatement(INSERT_FORFAIT);
 			statement.setString(1, this.getNom());
-			statement.setInt(2, this.getTarif());
-			statement.setInt(3, this.getAppel());
-			statement.setInt(4, this.getAppelAutreOp());
+			statement.setInt(2, this.getDuree());
+			statement.setInt(3, this.getValeurOffre());
+			statement.setInt(4, this.getAppel());
+			statement.setInt(5, this.getAppelAutreOp());
+			statement.setInt(6, this.getVolumeMega());
+			statement.setInt(7, this.getNbSms());
 			statement.execute();
 			conn.commit();
 		} catch (Exception ex) {
@@ -99,7 +169,7 @@ public class Forfait {
 			PreparedStatement preparedStatement = c.prepareStatement(ALL_FORFAIT);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nom"), rs.getInt("tarif"), rs.getInt("appel"), rs.getInt("appelAutreOp")));
+				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nom"), rs.getInt("duree"), rs.getInt("valeur_offre"), rs.getInt("appel"), rs.getInt("appelAutreOp"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
 			}
 			c.close();
 			
@@ -118,7 +188,7 @@ public class Forfait {
 			PreparedStatement preparedStatement = c.prepareStatement(ALL_FORFAIT_USER);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nom"), rs.getInt("tarif"), rs.getInt("appel"), rs.getInt("appelAutreOp")));
+				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nom"), rs.getInt("duree"), rs.getInt("valeur_offre"), rs.getInt("appel"), rs.getInt("appelAutreOp"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
 			}
 			c.close();
 			
