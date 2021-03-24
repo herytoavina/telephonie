@@ -132,7 +132,7 @@ public class Forfait {
 	}
 
 
-	private static final String INSERT_FORFAIT = "insert into forfait(Nom, duree, valeur_offre, appel, appelAutreOp, volume_mega, nb_sms) (?, ?, ?, ?, ?, ?, ? );";
+	private static final String INSERT_FORFAIT = "insert into forfait(Nom, duree, valeur_offre, appel, appelAutreOp, volume_mega, nb_sms) (?, ?, ?, ?, ?, ?, ? )";
 	public void insert() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
@@ -183,7 +183,7 @@ public class Forfait {
 		Connect con = new Connect();
 		List<Forfait> result = new ArrayList<Forfait>();
 		try {
-			String ALL_FORFAIT_USER = "select * from forfait where idForfait in (select idForfait from achatForfait where idUtilisateur="+idUtilisateur+")";
+			String ALL_FORFAIT_USER = "select idUtilisateur,forfait.* from forfait,achatForfait where forfait.idForfait=achatForfait.idForfait and idUtilisateur="+idUtilisateur;
 			Connection c = con.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement(ALL_FORFAIT_USER);
 			ResultSet rs = preparedStatement.executeQuery();

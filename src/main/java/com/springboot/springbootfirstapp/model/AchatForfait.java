@@ -49,6 +49,5 @@ public class AchatForfait {
 			if(statement != null) statement.close();
 			if(conn != null) conn.close();
 		}
-		
 	}
 }
