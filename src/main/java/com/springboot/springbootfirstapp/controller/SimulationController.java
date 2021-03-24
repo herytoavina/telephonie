@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.springbootfirstapp.model.Depot;
 import com.springboot.springbootfirstapp.model.Forfait;
 import com.springboot.springbootfirstapp.model.Simulation;
 
