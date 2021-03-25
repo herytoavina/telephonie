@@ -58,12 +58,12 @@ public class UtilisateurController {
 	}
 	
 	@GetMapping("/getToken")
-	public BuilderResponse GetTokens(@RequestBody Utilisateur utilisateur){
+	public BuilderResponse GetTokens(@RequestParam(value = "idUtilisateur")String idUtilisateur){
 		BuilderResponse response;
 		try {
 			List<String> result= new ArrayList<String>();
-			
-			String answer=utilisateur.getToken();
+			Utilisateur d = new Utilisateur();
+			String answer=d.getToken(idUtilisateur);
 			result.add(answer);
         response = new BuilderResponse(new Meta("200","valider"), result);
 		}
