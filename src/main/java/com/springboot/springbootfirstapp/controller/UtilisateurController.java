@@ -74,6 +74,21 @@ public class UtilisateurController {
 		return response;
 		
 	}
+	@GetMapping("/getIdUtilisateur")
+	public BuilderResponse getIdUtilisateur(@RequestBody Utilisateur utilisateur){
+		BuilderResponse response;
+		try {
+			List<String> result= new ArrayList<String>();
+			String answer=utilisateur.generateToken(utilisateur.getNom(),utilisateur.getMdp());
+			result.add(answer);
+        response = new BuilderResponse(new Meta("200","valider"), result);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+            response= new BuilderResponse(new Meta("500","error"),null);
+		}
+		return response;
+	}
 	
 	@GetMapping("/Validation")
 	public BuilderResponse Validation(@RequestParam(value = "idUtilisateur")String idUtilisateur){
