@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.springbootfirstapp.model.Depot;
 import com.springboot.springbootfirstapp.model.Utilisateur;
 
 import util.BuilderResponse;
@@ -38,17 +37,18 @@ public class UtilisateurController {
 		return response;
 		
 	}
+	
 	@PostMapping("/postToken")
 	public BuilderResponse LoginController(@RequestBody Utilisateur utilisateur) {
 		BuilderResponse response;
 		Utilisateur utils	= utilisateur.Connection(utilisateur.getNom(),utilisateur.getMdp());
 		try {
 			if(utils.getNom().equals((utils).getNom())) {
-				utilisateur.insert();
+				utils.insert();
 				response = new BuilderResponse(new Meta("200","valider"), null);
 			}
 			else {
-				response = new BuilderResponse(new Meta("500","error"), null);
+				response = new BuilderResponse(new Meta("502","error"), null);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

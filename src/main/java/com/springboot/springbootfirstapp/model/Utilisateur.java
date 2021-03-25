@@ -104,12 +104,13 @@ public class Utilisateur {
 		Connect con = new Connect();
 		Utilisateur result=new Utilisateur();
 		try {
-			String NUMERO_USER = "select * from utilisateur where nom="+nom+"and mdp =md5 ("+ mdp +")";
+			String NUMERO_USER = "select * from utilisateur where nom='"+nom+"' and mdp=md5('"+mdp+"')";
+			System.out.println(NUMERO_USER);
 			Connection c = con.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement(NUMERO_USER);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				result = new Utilisateur(rs.getString(0), rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(5));
+				result = new Utilisateur(rs.getString("idutilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("numero"),rs.getString("mdp"));
             }
 		}
 		catch (Exception e) {
@@ -140,7 +141,7 @@ public class Utilisateur {
 				PreparedStatement preparedStatement = c.prepareStatement(NUMERO_USER);
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {
-					result = new Utilisateur(rs.getString(0), rs.getString(1));
+					result = new Utilisateur(rs.getString(1), rs.getString(2));
 	            }
 			}
 			catch (Exception e) {
@@ -157,7 +158,7 @@ public class Utilisateur {
 				PreparedStatement preparedStatement = c.prepareStatement(NUMERO_USER);
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {
-					result = new Utilisateur(rs.getString(0), rs.getString(1));
+					result = new Utilisateur(rs.getString(1), rs.getString(2));
 	            }
 			}
 			catch (Exception e) {
