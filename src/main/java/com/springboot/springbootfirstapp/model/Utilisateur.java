@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PostMapping;
+
 public class Utilisateur {
 	public Utilisateur(String idUtilisateur, String token) {
 		super();
@@ -97,11 +99,11 @@ public class Utilisateur {
 		}
 		return result;
 	}
-	public Utilisateur Connection(String prenom,String mdp) {
+	public Utilisateur Connection(String nom,String mdp) {
 		Connect con = new Connect();
 		Utilisateur result=new Utilisateur();
 		try {
-			String NUMERO_USER = "select * from utilisateur where prenom="+prenom+"and mdp =md5 ("+ mdp +")";
+			String NUMERO_USER = "select * from utilisateur where nom="+nom+"and mdp =md5 ("+ mdp +")";
 			Connection c = con.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement(NUMERO_USER);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -114,7 +116,7 @@ public class Utilisateur {
 		}
 		return result;
 	}
-	public String generateToken(String prenom,String mdp) {
+	public String generateToken(String nom,String mdp) {
 		String IdUtilisateur=null;
 		try {
 		Utilisateur utilisateur = Connection(prenom, mdp);
@@ -127,6 +129,7 @@ public class Utilisateur {
 		}
 		return IdUtilisateur;
 	}
+	
 	public String  getToken(String IdUtilisateur) {
 		Connect con = new Connect();
 		Utilisateur result=new Utilisateur();
