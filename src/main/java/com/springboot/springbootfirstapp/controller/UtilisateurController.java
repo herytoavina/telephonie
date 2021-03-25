@@ -38,14 +38,14 @@ public class UtilisateurController {
 		return response;
 		
 	}
-	@PostMapping("/PostToken")
+	@PostMapping("/postToken")
 	public BuilderResponse LoginController(@RequestBody Utilisateur utilisateur) {
 		BuilderResponse response;
 		Utilisateur utils	= utilisateur.Connection(utilisateur.getNom(),utilisateur.getMdp());
 		try {
-			if(utils.getNom()==utilisateur.getNom()) {
-			utilisateur.insert();
-			response = new BuilderResponse(new Meta("200","valider"), null);
+			if(utils.getNom().equals((utils).getNom())) {
+				utilisateur.insert();
+				response = new BuilderResponse(new Meta("200","valider"), null);
 			}
 			else {
 				response = new BuilderResponse(new Meta("500","error"), null);
@@ -56,7 +56,8 @@ public class UtilisateurController {
 		}
 		return response;
 	}
-	@GetMapping("/GetTokens")
+	
+	@GetMapping("/getToken")
 	public BuilderResponse GetTokens(@RequestBody Utilisateur utilisateur){
 		BuilderResponse response;
 		try {
@@ -73,6 +74,7 @@ public class UtilisateurController {
 		return response;
 		
 	}
+	
 	@GetMapping("/Validation")
 	public BuilderResponse Validation(@RequestParam(value = "idUtilisateur")String idUtilisateur){
 		BuilderResponse response;

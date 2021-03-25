@@ -99,6 +99,7 @@ public class Utilisateur {
 		}
 		return result;
 	}
+	
 	public Utilisateur Connection(String nom,String mdp) {
 		Connect con = new Connect();
 		Utilisateur result=new Utilisateur();
