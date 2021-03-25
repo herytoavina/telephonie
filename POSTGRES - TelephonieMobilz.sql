@@ -16,6 +16,12 @@ create table utilisateur (
     primary key (IdUtilisateur)
 );
 
+create table UserToken(
+    IdUtilisateur varchar(50) not NULL,
+    token varchar(40) DEFAULT md5(CONCAT ('user',LOCALTIME)),
+    foreign key (IdUtilisateur) references utilisateur(IdUtilisateur)
+)
+insert into UserToken(IdUtilisateur) VALUES (USER-001);
 insert into utilisateur(Nom,Prenom,Numero,Mdp) values ('Hery', 'Toavina', '0326358687', md5('2001'));
 insert into utilisateur(Nom,Prenom,Numero,Mdp) values ('Francky', 'Rado', '0326358688', md5('2000'));
 
@@ -45,7 +51,7 @@ $$
 BEGIN
          INSERT INTO depotAttente
          VALUES(NEW.IdDepot);
- 
+
     RETURN NEW;
 END;
 $$
@@ -56,7 +62,7 @@ CREATE TRIGGER depotAttente_trigger
   ON depot
   FOR EACH ROW
   EXECUTE PROCEDURE insertAttente();
-  
+
 insert into depot (IdUtilisateur, Montant, DateDepot) values ('USER-001', 200000, CURRENT_TIMESTAMP);
 insert into depot (IdUtilisateur, Montant, DateDepot) values ('USER-002', 300000, CURRENT_TIMESTAMP);
 
