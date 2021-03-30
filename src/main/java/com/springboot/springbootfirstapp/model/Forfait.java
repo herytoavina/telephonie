@@ -89,16 +89,7 @@ public class Forfait {
 		NbSms = nbSms;
 	}
 
-	public static String getInsertForfait() {
-		return INSERT_FORFAIT;
-	}
-
-	public static String getAllForfait() {
-		return ALL_FORFAIT;
-	}
-
 	public Forfait() {super();}
-	
 	
 
 	public Forfait(String nom, int duree, int valeurOffre, int appel, int appelAutreOp,
@@ -127,7 +118,7 @@ public class Forfait {
 	}
 
 
-	private static final String INSERT_FORFAIT = "insert into forfait(Nom, duree, valeur_offre, appel, appelAutreOp, volume_mega, nb_sms) (?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_FORFAIT = "insert into forfait(Nom, duree, valeur_offre, appel, appelAutreOp, volume_mega, nb_sms) values (?, ?, ?, ?, ?, ?, ?)";
 	public void insert() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
