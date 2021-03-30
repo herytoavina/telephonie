@@ -22,6 +22,7 @@ create table UserToken(
     foreign key (IdUtilisateur) references utilisateur(IdUtilisateur)
 )
 insert into UserToken(IdUtilisateur) VALUES (USER-001);
+
 insert into utilisateur(Nom,Prenom,Numero,Mdp) values ('Hery', 'Toavina', '0326358687', md5('2001'));
 insert into utilisateur(Nom,Prenom,Numero,Mdp) values ('Francky', 'Rado', '0326358688', md5('2000'));
 
