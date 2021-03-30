@@ -7,11 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 public class Forfait {
 	
 	private String idForfait;
@@ -132,7 +127,7 @@ public class Forfait {
 	}
 
 
-	private static final String INSERT_FORFAIT = "insert into forfait(Nom, duree, valeur_offre, appel, appelAutreOp, volume_mega, nb_sms) (?, ?, ?, ?, ?, ?, ? )";
+	private static final String INSERT_FORFAIT = "insert into forfait(Nom, duree, valeur_offre, appel, appelAutreOp, volume_mega, nb_sms) (?, ?, ?, ?, ?, ?, ?)";
 	public void insert() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;

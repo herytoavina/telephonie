@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PostMapping;
-
 public class Utilisateur {
 	public Utilisateur(String idUtilisateur, String token) {
 		super();

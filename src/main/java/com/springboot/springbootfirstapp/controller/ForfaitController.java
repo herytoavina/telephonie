@@ -22,6 +22,20 @@ import util.Meta;
 @RequestMapping("/forfait")
 public class ForfaitController {
 
+	
+	@PostMapping("/addForfait")
+	public BuilderResponse addForfait(@RequestBody Forfait forfait) {
+		BuilderResponse response;
+		try {
+			forfait.insert();
+			response = new BuilderResponse(new Meta("200","valider"), null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			response = new BuilderResponse(new Meta("500","error"), null);
+		}
+		return response;
+	}
+		
 	@GetMapping("/listeForfait")
 	public BuilderResponse listeForfait(){
 		BuilderResponse response;
@@ -49,6 +63,22 @@ public class ForfaitController {
 			response = new BuilderResponse(new Meta("500","error"), null);
 		}
 		return response;
+	}
+	
+	@GetMapping("/getVenteForfait")
+	public BuilderResponse getVenteForfait(){
+		BuilderResponse response;
+		try {
+		AchatForfait f = new AchatForfait();
+		List<AchatForfait> result = f.getVenteForfait();
+        response = new BuilderResponse(new Meta("200","valider"), result);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+            response= new BuilderResponse(new Meta("500","error"),null);
+		}
+		return response;
+		
 	}
 	
 	@GetMapping("/listeForfaitUser")

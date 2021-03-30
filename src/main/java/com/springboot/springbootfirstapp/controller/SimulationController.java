@@ -50,4 +50,18 @@ public class SimulationController {
 		}
 		return response;
 	}
+	
+	@GetMapping("/getHistorique")
+	public BuilderResponse getHistoriqueAppel(@RequestParam(value="idUtilisateur")String idUtilisateur) {
+		Simulation simulation = new Simulation();
+		BuilderResponse response;
+		List<Simulation> historique = simulation.getSimulationById(idUtilisateur, "appel");
+		try {
+			response = new BuilderResponse(new Meta("200","valider"), historique);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			response = new BuilderResponse(new Meta("500","error"), null);
+		}
+		return response;
+	}
 }
