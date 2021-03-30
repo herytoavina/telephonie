@@ -105,9 +105,10 @@ public class Simulation {
 		List<Simulation> results = new ArrayList<Simulation>();
 		Simulation result = new Simulation();
 		try {
-			String NUMERO_USER = "select * from simulation where idUtilisateur='"+idUtilisateur+"' and typeSimulation='"+typeSimulation+"'";
+			String NUMERO_USER = "select * from simulation where idUtilisateur="+idUtilisateur+" and typeSimulation='"+typeSimulation+"'";
 			Connection c = con.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement(NUMERO_USER);
+			System.out.print(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				result = new Simulation(rs.getString("idSimulation"), rs.getString("monNumero"), rs.getString("numero"), rs.getInt("duree"), rs.getString("typeSimulation"));
@@ -136,10 +137,10 @@ public class Simulation {
 		simulations = new Simulation().getSimulationById(idUtilisateur, "appel");
 		
 		List<Simulation> simulationsSms = new ArrayList<Simulation>();
-		simulations = new Simulation().getSimulationById(idUtilisateur, "sms");
+		simulationsSms = new Simulation().getSimulationById(idUtilisateur, "sms");
 		
 		List<Simulation> simulationsInternet = new ArrayList<Simulation>();
-		simulations = new Simulation().getSimulationById(idUtilisateur, "internet");
+		simulationsInternet = new Simulation().getSimulationById(idUtilisateur, "internet");
 		
 		List<Forfait> forfaits = new Forfait().listeForfaitUser(idUtilisateur);
 	
