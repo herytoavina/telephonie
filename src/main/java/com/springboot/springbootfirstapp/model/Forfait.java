@@ -91,7 +91,7 @@ public class Forfait {
 		this.nbSms = nbSms;
 	}
 	
-	
+	public Forfait() {}
 	
 	public Forfait(String idForfait, String typeForfait, String nomForfait, int prixForfait, int dureeForfait, int valeurAppel,
 			String modeAppel, int volumeMega, int nbSms) {

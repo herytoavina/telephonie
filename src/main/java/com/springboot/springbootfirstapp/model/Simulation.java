@@ -133,19 +133,19 @@ public class Simulation {
 	}
 	
 	public List<Forfait> getCout(String idUtilisateur) {
-		List<Simulation> simulations = new ArrayList<Simulation>();
+	/*	List<Simulation> simulations = new ArrayList<Simulation>();
 		simulations = new Simulation().getSimulationById(idUtilisateur, "appel");
 		
 		List<Simulation> simulationsSms = new ArrayList<Simulation>();
 		simulationsSms = new Simulation().getSimulationById(idUtilisateur, "sms");
 		
 		List<Simulation> simulationsInternet = new ArrayList<Simulation>();
-		simulationsInternet = new Simulation().getSimulationById(idUtilisateur, "internet");
+		simulationsInternet = new Simulation().getSimulationById(idUtilisateur, "internet");*/
 		
 		List<Forfait> forfaits = new Forfait().listeForfaitUser(idUtilisateur);
 	
-		/**************************SIMULATION APPEL*********************************/
-		if(simulations != null) {
+		/**************************SIMULATION APPEL*********************************
+		/*if(simulations != null) {
 			for(int j=0; j<simulations.size(); j++) {
 				Simulation simulation = simulations.get(j);
 				for(int i=0;i<forfaits.size();i++) {
@@ -175,7 +175,7 @@ public class Simulation {
 		}
 		
 		
-		/**************************SIMULATION SMS*********************************/
+		/**************************SIMULATION SMS*********************************
 		if(simulationsSms != null) {
 			for(int j=0; j<simulationsSms.size(); j++) {
 				Simulation simulation = simulationsSms.get(j);
@@ -200,7 +200,7 @@ public class Simulation {
 			}
 		}
 		
-		/**************************SIMULATION MEGA*********************************/
+		/**************************SIMULATION MEGA*********************************
 		if(simulationsInternet != null) {
 			for(int j=0; j<simulationsInternet.size(); j++) {
 				Simulation simulation = simulationsInternet.get(j);
@@ -224,7 +224,7 @@ public class Simulation {
 		}
 		
 	
-		}
+		}*/
 
 		return forfaits;
 	}
