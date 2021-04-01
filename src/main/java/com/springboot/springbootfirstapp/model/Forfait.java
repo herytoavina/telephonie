@@ -10,21 +10,14 @@ import java.util.List;
 public class Forfait {
 	
 	private String idForfait;
-	
-	private String nom;
-		
-	private int duree;
-	
-	private int valeurOffre;
-	
-	private int appel;
-	
-	private int appelAutreOp;
-	
+	private	String nomForfait;
+	private int prixForfait;
+	private int dureeForfait;
+	private int valeurAppel;
+	private String modeAppel;
 	private int volumeMega;
-	
-	private int NbSms;
-	
+	private int nbSms;
+
 	public String getIdForfait() {
 		return idForfait;
 	}
@@ -33,44 +26,44 @@ public class Forfait {
 		this.idForfait = idForfait;
 	}
 
-	public String getNom() {
-		return nom;
+	public String getNomForfait() {
+		return nomForfait;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setNomForfait(String nomForfait) {
+		this.nomForfait = nomForfait;
 	}
 
-	public int getDuree() {
-		return duree;
+	public int getPrixForfait() {
+		return prixForfait;
 	}
 
-	public void setDuree(int duree) {
-		this.duree = duree;
+	public void setPrixForfait(int prixForfait) {
+		this.prixForfait = prixForfait;
 	}
 
-	public int getValeurOffre() {
-		return valeurOffre;
+	public int getDureeForfait() {
+		return dureeForfait;
 	}
 
-	public void setValeurOffre(int valeurOffre) {
-		this.valeurOffre = valeurOffre;
+	public void setDureeForfait(int dureeForfait) {
+		this.dureeForfait = dureeForfait;
 	}
 
-	public int getAppel() {
-		return appel;
+	public int getValeurAppel() {
+		return valeurAppel;
 	}
 
-	public void setAppel(int appel) {
-		this.appel = appel;
+	public void setValeurAppel(int valeurAppel) {
+		this.valeurAppel = valeurAppel;
 	}
 
-	public int getAppelAutreOp() {
-		return appelAutreOp;
+	public String getModeAppel() {
+		return modeAppel;
 	}
 
-	public void setAppelAutreOp(int appelAutreOp) {
-		this.appelAutreOp = appelAutreOp;
+	public void setModeAppel(String modeAppel) {
+		this.modeAppel = modeAppel;
 	}
 
 	public int getVolumeMega() {
@@ -82,43 +75,42 @@ public class Forfait {
 	}
 
 	public int getNbSms() {
-		return NbSms;
+		return nbSms;
 	}
 
 	public void setNbSms(int nbSms) {
-		NbSms = nbSms;
-	}
-
-	public Forfait() {super();}
-	
-
-	public Forfait(String nom, int duree, int valeurOffre, int appel, int appelAutreOp,
-			int volumeMega, int nbSms) {
-		super();
-		this.nom = nom;
-		this.duree = duree;
-		this.valeurOffre = valeurOffre;
-		this.appel = appel;
-		this.appelAutreOp = appelAutreOp;
-		this.volumeMega = volumeMega;
-		this.NbSms = nbSms;
+		this.nbSms = nbSms;
 	}
 	
-	public Forfait(String idForfait, String nom, int duree, int valeurOffre, int appel, int appelAutreOp,
-			int volumeMega, int nbSms) {
+	
+	
+	public Forfait(String idForfait, String nomForfait, int prixForfait, int dureeForfait, int valeurAppel,
+			String modeAppel, int volumeMega, int nbSms) {
 		super();
-		this.idForfait = idForfait;
-		this.nom = nom;
-		this.duree = duree;
-		this.valeurOffre = valeurOffre;
-		this.appel = appel;
-		this.appelAutreOp = appelAutreOp;
-		this.volumeMega = volumeMega;
-		this.NbSms = nbSms;
+		this.setIdForfait(idForfait);
+		this.setNomForfait(nomForfait);
+		this.setPrixForfait(prixForfait);
+		this.setDureeForfait(dureeForfait);
+		this.setValeurAppel(valeurAppel);
+		this.setModeAppel(modeAppel);
+		this.setVolumeMega(volumeMega);
+		this.setNbSms(nbSms);
+	}
+	
+	public Forfait(String nomForfait, int prixForfait, int dureeForfait, int valeurAppel,
+			String modeAppel, int volumeMega, int nbSms) {
+		super();
+		this.setNomForfait(nomForfait);
+		this.setPrixForfait(prixForfait);
+		this.setDureeForfait(dureeForfait);
+		this.setValeurAppel(valeurAppel);
+		this.setModeAppel(modeAppel);
+		this.setVolumeMega(volumeMega);
+		this.setNbSms(nbSms);
 	}
 
 
-	private static final String INSERT_FORFAIT = "insert into forfait(Nom, duree, valeur_offre, appel, appelAutreOp, volume_mega, nb_sms) values (?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_FORFAIT = "insert into forfait(nomForfait, prixForfait, dureeForfait, valeur_appel, mode_appel, volume_mega, nb_sms) values (?, ?, ?, ?, ?, ?, ?)";
 	public void insert() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
@@ -127,11 +119,11 @@ public class Forfait {
 			conn = c.getConnection();
 			conn.setAutoCommit(false);
 			statement = conn.prepareStatement(INSERT_FORFAIT);
-			statement.setString(1, this.getNom());
-			statement.setInt(2, this.getDuree());
-			statement.setInt(3, this.getValeurOffre());
-			statement.setInt(4, this.getAppel());
-			statement.setInt(5, this.getAppelAutreOp());
+			statement.setString(1, this.getNomForfait());
+			statement.setInt(2, this.getPrixForfait());
+			statement.setInt(3, this.getDureeForfait());			
+			statement.setInt(4, this.getValeurAppel());
+			statement.setString(5, this.getModeAppel());
 			statement.setInt(6, this.getVolumeMega());
 			statement.setInt(7, this.getNbSms());
 			statement.execute();
@@ -155,7 +147,7 @@ public class Forfait {
 			PreparedStatement preparedStatement = c.prepareStatement(ALL_FORFAIT);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nom"), rs.getInt("duree"), rs.getInt("valeur_offre"), rs.getInt("appel"), rs.getInt("appelAutreOp"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
+				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nomForfait"), rs.getInt("prixForfait"), rs.getInt("dureeForfait"), rs.getInt("valeur_appel"), rs.getString("mode_appel"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
 			}
 			c.close();
 			
@@ -174,7 +166,7 @@ public class Forfait {
 			PreparedStatement preparedStatement = c.prepareStatement(ALL_FORFAIT_USER);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nom"), rs.getInt("duree"), rs.getInt("valeur_offre"), rs.getInt("appel"), rs.getInt("appelAutreOp"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
+				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nomForfait"), rs.getInt("prixForfait"), rs.getInt("dureeForfait"), rs.getInt("valeur_appel"), rs.getString("mode_appel"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
 			}
 			c.close();
 			
