@@ -121,7 +121,7 @@ public class Forfait {
 	}
 
 
-	private static final String INSERT_FORFAIT = "insert into forfait(typeForfait, nomForfait, prixForfait, dureeForfait, valeur_appel, mode_appel, volume_mega, nb_sms) values (?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_FORFAIT = "insert into forfait(typeForfait, nomForfait, prixForfait, dureeForfait, valeur_appel, mode_appel, volume_mega, nb_sms) values (?, ?, ?, ?, ?, ?, ?, ?)";
 	public void insert() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
