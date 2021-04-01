@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.springbootfirstapp.model.AchatForfait;
+import com.springboot.springbootfirstapp.model.ConsommationAppel;
 import com.springboot.springbootfirstapp.model.Forfait;
 
 import util.BuilderResponse;
@@ -35,7 +36,20 @@ public class ForfaitController {
 		}
 		return response;
 	}
-		
+	
+	@PostMapping("/addConsommation")
+	public BuilderResponse addConsommation(@RequestBody ConsommationAppel appel) {
+		BuilderResponse response;
+		try {
+			appel.insert();
+			response = new BuilderResponse(new Meta("200","valider"), null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			response = new BuilderResponse(new Meta("500","error"), null);
+		}
+		return response;
+	}
+	
 	@GetMapping("/listeForfait")
 	public BuilderResponse listeForfait(){
 		BuilderResponse response;

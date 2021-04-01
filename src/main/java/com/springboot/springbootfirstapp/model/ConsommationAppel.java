@@ -73,19 +73,18 @@ public class ConsommationAppel {
 		
 	}
 	
-	private static final String ALL_CONSOMMATION = "select * from consommationAppel";
-	public List<ConsommationAppel> listeForfait(){
+	public ConsommationAppel getConsommationAppel(String idForfait){
+		final String CONSOMMATION_FORFAIT = "select * from consommationAppel where idForfait='"+idForfait+"'";
 		Connect con = new Connect();
-		List<ConsommationAppel> result = new ArrayList<ConsommationAppel>();
+		ConsommationAppel result = new ConsommationAppel();
 		try {
 			Connection c = con.getConnection();
-			PreparedStatement preparedStatement = c.prepareStatement(ALL_CONSOMMATION);
+			PreparedStatement preparedStatement = c.prepareStatement(CONSOMMATION_FORFAIT);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				result.add(new ConsommationAppel(rs.getString("idForfait"), rs.getInt("valeur_appel"), rs.getInt("valeur_autre")));
+				result = new ConsommationAppel(rs.getString("idForfait"), rs.getInt("valeur_appel"), rs.getInt("valeur_autre"));
 			}
 			c.close();
-			
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}

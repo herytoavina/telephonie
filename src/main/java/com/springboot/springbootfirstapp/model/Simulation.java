@@ -108,7 +108,6 @@ public class Simulation {
 			String NUMERO_USER = "select * from simulation where idUtilisateur="+idUtilisateur+" and typeSimulation='"+typeSimulation+"'";
 			Connection c = con.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement(NUMERO_USER);
-			System.out.print(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				result = new Simulation(rs.getString("idSimulation"), rs.getString("monNumero"), rs.getString("numero"), rs.getInt("duree"), rs.getString("typeSimulation"));
@@ -124,8 +123,8 @@ public class Simulation {
 
 	public boolean isAutreOperateur(String monNumero, String numero) {
 		
-		String monOp = monNumero.substring(3);
-		String AutreOp = numero.substring(3);
+		String monOp = monNumero.substring(0, 3);
+		String AutreOp = numero.substring(0, 3);
 
 		if(monOp.equals(AutreOp)) return false;
 		
@@ -133,49 +132,56 @@ public class Simulation {
 	}
 	
 	public List<Forfait> getCout(String idUtilisateur) {
-	/*	List<Simulation> simulations = new ArrayList<Simulation>();
+	List<Simulation> simulations = new ArrayList<Simulation>();
 		simulations = new Simulation().getSimulationById(idUtilisateur, "appel");
 		
 		List<Simulation> simulationsSms = new ArrayList<Simulation>();
 		simulationsSms = new Simulation().getSimulationById(idUtilisateur, "sms");
 		
 		List<Simulation> simulationsInternet = new ArrayList<Simulation>();
-		simulationsInternet = new Simulation().getSimulationById(idUtilisateur, "internet");*/
+		simulationsInternet = new Simulation().getSimulationById(idUtilisateur, "internet");
 		
 		List<Forfait> forfaits = new Forfait().listeForfaitUser(idUtilisateur);
 	
-		/**************************SIMULATION APPEL*********************************
-		/*if(simulations != null) {
+		/**************************SIMULATION APPEL*********************************/
+		if(simulations != null) {
 			for(int j=0; j<simulations.size(); j++) {
 				Simulation simulation = simulations.get(j);
 				for(int i=0;i<forfaits.size();i++) {
-					int appel = forfaits.get(i).getAppel();
+					ConsommationAppel conso = new ConsommationAppel();
+					conso = conso.getConsommationAppel(forfaits.get(i).getIdForfait());
+					int appel = conso.getValeurAppel();
 					boolean isAutreOperateur = simulation.isAutreOperateur(simulation.getMonNumero(), simulation.getNumero());
-					if(isAutreOperateur) appel = forfaits.get(i).getAppelAutreOp();
-					int valeurSimulation = simulation.getDuree()*appel;
-					int valeurOffre = forfaits.get(i).getValeurOffre();
-					int reste = valeurOffre - valeurSimulation;
+					if(isAutreOperateur) appel = conso.getValeurAutre();
+					int valeurSimulation = simulation.getDuree()*60*appel; // En Ar
+					int valeurOffre = forfaits.get(i).getValeurAppel(); // En Ar
+					
+					int reste = valeurOffre - valeurSimulation; // En Ar
+					
+					if(forfaits.get(i).getModeAppel().equals("Mn")) { reste = valeurOffre - simulation.getDuree(); /* En min */ }
 					
 					if(reste > 0) {
-						forfaits.get(i).setValeurOffre(reste);
-						//result = forfaits.get(i).getValeurOffre();
+						forfaits.get(i).setValeurAppel(reste);
 						break;
 					} 
 					if(reste == 0) {
-						forfaits.get(i).setValeurOffre(0);
+						forfaits.get(i).setValeurAppel(0);
 						break;
 					}
 					if(reste < 0) {
-						forfaits.get(i).setValeurOffre(0);
-						simulation.setDuree(simulation.getDuree()-(valeurOffre*appel));
+						forfaits.get(i).setValeurAppel(0);
+						simulation.setDuree(((-1)*(reste/appel))/60);
+						if(forfaits.get(i).getModeAppel().equals("Mn")) {
+							simulation.setDuree((-1)*reste);
+						}
 					}
 				}
-		
+				
 			}
 		}
 		
 		
-		/**************************SIMULATION SMS*********************************
+		/**************************SIMULATION SMS*********************************/
 		if(simulationsSms != null) {
 			for(int j=0; j<simulationsSms.size(); j++) {
 				Simulation simulation = simulationsSms.get(j);
@@ -200,7 +206,7 @@ public class Simulation {
 			}
 		}
 		
-		/**************************SIMULATION MEGA*********************************
+		/**************************SIMULATION MEGA*********************************/
 		if(simulationsInternet != null) {
 			for(int j=0; j<simulationsInternet.size(); j++) {
 				Simulation simulation = simulationsInternet.get(j);
@@ -224,7 +230,7 @@ public class Simulation {
 		}
 		
 	
-		}*/
+		}
 
 		return forfaits;
 	}
