@@ -45,7 +45,10 @@ public class UtilisateurController {
 		try {
 			if(utils.getNom().equals((utils).getNom())) {
 				utils.insert();
-				response = new BuilderResponse(new Meta("200","valider"), null);
+				List<String> result= new ArrayList<String>();
+				String resultat= utils.getToken(utils.getIdUtilisateur());
+				result.add(resultat);
+				response = new BuilderResponse(new Meta("200","valider"), result);
 			}
 			else {
 				response = new BuilderResponse(new Meta("502","error"), null);
@@ -57,7 +60,7 @@ public class UtilisateurController {
 		return response;
 	}
 	
-	@GetMapping("/getToken")
+	/*@GetMapping("/getToken")
 	public BuilderResponse GetTokens(@RequestParam(value = "idUtilisateur")String idUtilisateur){
 		BuilderResponse response;
 		try {
@@ -75,11 +78,12 @@ public class UtilisateurController {
 		
 	}
 	@GetMapping("/getIdUtilisateur")
-	public BuilderResponse getIdUtilisateur(@RequestBody Utilisateur utilisateur){
+	public BuilderResponse getIdUtilisateur(@RequestParam(value = "token")String token){
 		BuilderResponse response;
 		try {
 			List<String> result= new ArrayList<String>();
-			String answer=utilisateur.generateToken(utilisateur.getNom(),utilisateur.getMdp());
+			Utilisateur d = new Utilisateur();
+			String answer=d.getId(token);
 			result.add(answer);
         response = new BuilderResponse(new Meta("200","valider"), result);
 		}
@@ -88,16 +92,17 @@ public class UtilisateurController {
             response= new BuilderResponse(new Meta("500","error"),null);
 		}
 		return response;
-	}
+	}*/
 	
 	@GetMapping("/Validation")
-	public BuilderResponse Validation(@RequestParam(value = "idUtilisateur")String idUtilisateur){
+	public BuilderResponse Validation(@RequestParam(value = "token")String token){
 		BuilderResponse response;
 		try {
-		Utilisateur d = new Utilisateur();
-		d= d.getId(idUtilisateur);
-		List<Utilisateur> result = new ArrayList<Utilisateur>();
-		result.add(d);
+			List<String> result= new ArrayList<String>();
+			Utilisateur d = new Utilisateur();
+			String answer=d.getId(token);
+			result.add(answer);
+
         response = new BuilderResponse(new Meta("200","valider"), result);
 		}
 		catch (Exception e) {

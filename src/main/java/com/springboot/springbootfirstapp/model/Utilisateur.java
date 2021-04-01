@@ -110,13 +110,14 @@ public class Utilisateur {
 			while(rs.next()) {
 				result = new Utilisateur(rs.getString("idutilisateur"), rs.getString("nom"), rs.getString("prenom"), rs.getString("numero"),rs.getString("mdp"));
             }
+			c.close();
 		}
 		catch (Exception e) {
 			System.out.println(e);
 		}
 		return result;
 	}
-	public String generateToken(String nom,String mdp) {
+	/*public String generateToken(String nom,String mdp) {
 		String IdUtilisateur=null;
 		try {
 		Utilisateur utilisateur = Connection(prenom, mdp);
@@ -128,26 +129,27 @@ public class Utilisateur {
 			System.out.println(e);
 		}
 		return IdUtilisateur;
-	}
+	}*/
 	
 	public String  getToken(String IdUtilisateur) {
 		Connect con = new Connect();
 		Utilisateur result=new Utilisateur();
 		try {
-		String NUMERO_USER = "select * from UserToken where IdUtilisateur="+IdUtilisateur;
+		String NUMERO_USER = "select * from UserToken where IdUtilisateur='"+IdUtilisateur +"'";
 				Connection c = con.getConnection();
 				PreparedStatement preparedStatement = c.prepareStatement(NUMERO_USER);
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {
 					result = new Utilisateur(rs.getString(1), rs.getString(2));
 	            }
+				c.close();
 			}
 			catch (Exception e) {
 				System.out.println(e);
 			}
 			return result.Token;
 		}
-	public Utilisateur  getId(String token) {
+	public String   getId(String token) {
 		Connect con = new Connect();
 		Utilisateur result=new Utilisateur();
 		try {
@@ -158,11 +160,12 @@ public class Utilisateur {
 				while(rs.next()) {
 					result = new Utilisateur(rs.getString(1), rs.getString(2));
 	            }
+				c.close();
 			}
 			catch (Exception e) {
 				System.out.println(e);
 			}
-			return result;
+			return result.idUtilisateur;
 		}
 	private static final String delete_deconnection = "delete into UserToken WHERE `IdUtilisateur` = (?)";
 	@SuppressWarnings("resource")
