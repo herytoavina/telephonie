@@ -33,7 +33,38 @@ public class AchatForfait {
 		this.setIdUtilisateur(idUtilisateur);
 	}
 	
-	private static final String INSERT_ACHAT_FORFAIT = "insert into achatForfait values (?, ?)";
+	private String nomForfait;
+	private int vente;
+	private int mois;
+	
+	public String getNomForfait() {
+		return nomForfait;
+	}
+	public void setNomForfait(String nomForfait) {
+		this.nomForfait = nomForfait;
+	}
+	public int getVente() {
+		return vente;
+	}
+	public void setVente(int vente) {
+		this.vente = vente;
+	}
+	public int getMois() {
+		return mois;
+	}
+	public void setMois(int mois) {
+		this.mois = mois;
+	}
+	
+	public AchatForfait(String nomForfait, int vente, int mois) {
+		super();
+		this.nomForfait = nomForfait;
+		this.vente = vente;
+		this.mois = mois;
+	}
+
+
+	private static final String INSERT_ACHAT_FORFAIT = "insert into achatForfait values (?, ?, CURRENT_TIMESTAMP)";
 	public void insert() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
@@ -57,7 +88,7 @@ public class AchatForfait {
 		}
 	}
 	
-	private static final String VENTE_FORFAIT = "select nomForfait, count(idForfait) as vente as from achatForfait,forfait where achatForfait.idForfait=forfait.idForfait group by nomForfait ";
+	private static final String VENTE_FORFAIT = "select nomForfait, count(achatForfait.idForfait) as vente, EXTRACT(MONTH from achatforfait.dateachat) as mois  from achatForfait,forfait where achatForfait.idForfait=forfait.idForfait group by nomForfait,mois ";
 	public List<AchatForfait> getVenteForfait() {
 		Connect con = new Connect();
 		List<AchatForfait> result = new ArrayList<AchatForfait>();
@@ -66,7 +97,7 @@ public class AchatForfait {
 			PreparedStatement preparedStatement = c.prepareStatement(VENTE_FORFAIT);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				result.add(new AchatForfait(rs.getString("nomForfait"), rs.getString("vente")));
+				result.add(new AchatForfait(rs.getString("nomForfait"), rs.getInt("vente"), rs.getInt("mois")));
 			}
 			c.close();
 			
