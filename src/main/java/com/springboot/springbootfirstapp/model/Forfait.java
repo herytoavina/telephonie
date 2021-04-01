@@ -149,6 +149,21 @@ public class Forfait {
 		}
 		
 	}
+	private static final String LAST_ID = "select MAX(idForfait) as lastId from forfait";
+	public static String getLastInsertID(Connection c) {
+		String result = "";
+		try {
+			PreparedStatement preparedStatement = c.prepareStatement(LAST_ID);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				result = rs.getString("lastId");
+			}
+			
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		return result;
+	}
 	
 	private static final String ALL_FORFAIT = "select * from forfait";
 	public List<Forfait> listeForfait(){

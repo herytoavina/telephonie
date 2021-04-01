@@ -56,7 +56,7 @@ public class ConsommationAppel {
 			conn = c.getConnection();
 			conn.setAutoCommit(false);
 			statement = conn.prepareStatement(INSERT_CONSOMMATION);
-			statement.setString(1, this.getIdForfait());
+			statement.setString(1, Forfait.getLastInsertID(conn));
 			statement.setInt(2, this.getValeurAppel());
 			statement.setInt(3, this.getValeurAutre());
 			statement.execute();
