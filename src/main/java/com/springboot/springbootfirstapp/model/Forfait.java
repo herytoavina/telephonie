@@ -10,6 +10,7 @@ import java.util.List;
 public class Forfait {
 	
 	private String idForfait;
+	private String typeForfait;
 	private	String nomForfait;
 	private int prixForfait;
 	private int dureeForfait;
@@ -78,16 +79,25 @@ public class Forfait {
 		return nbSms;
 	}
 
+	public String getTypeForfait() {
+		return typeForfait;
+	}
+
+	public void setTypeForfait(String typeForfait) {
+		this.typeForfait = typeForfait;
+	}
+
 	public void setNbSms(int nbSms) {
 		this.nbSms = nbSms;
 	}
 	
 	
 	
-	public Forfait(String idForfait, String nomForfait, int prixForfait, int dureeForfait, int valeurAppel,
+	public Forfait(String idForfait, String typeForfait, String nomForfait, int prixForfait, int dureeForfait, int valeurAppel,
 			String modeAppel, int volumeMega, int nbSms) {
 		super();
 		this.setIdForfait(idForfait);
+		this.setTypeForfait(typeForfait);
 		this.setNomForfait(nomForfait);
 		this.setPrixForfait(prixForfait);
 		this.setDureeForfait(dureeForfait);
@@ -97,9 +107,10 @@ public class Forfait {
 		this.setNbSms(nbSms);
 	}
 	
-	public Forfait(String nomForfait, int prixForfait, int dureeForfait, int valeurAppel,
+	public Forfait(String typeForfait, String nomForfait, int prixForfait, int dureeForfait, int valeurAppel,
 			String modeAppel, int volumeMega, int nbSms) {
 		super();
+		this.setTypeForfait(typeForfait);
 		this.setNomForfait(nomForfait);
 		this.setPrixForfait(prixForfait);
 		this.setDureeForfait(dureeForfait);
@@ -110,7 +121,7 @@ public class Forfait {
 	}
 
 
-	private static final String INSERT_FORFAIT = "insert into forfait(nomForfait, prixForfait, dureeForfait, valeur_appel, mode_appel, volume_mega, nb_sms) values (?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_FORFAIT = "insert into forfait(typeForfait, nomForfait, prixForfait, dureeForfait, valeur_appel, mode_appel, volume_mega, nb_sms) values (?, ?, ?, ?, ?, ?, ?)";
 	public void insert() throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
@@ -119,13 +130,14 @@ public class Forfait {
 			conn = c.getConnection();
 			conn.setAutoCommit(false);
 			statement = conn.prepareStatement(INSERT_FORFAIT);
-			statement.setString(1, this.getNomForfait());
-			statement.setInt(2, this.getPrixForfait());
-			statement.setInt(3, this.getDureeForfait());			
-			statement.setInt(4, this.getValeurAppel());
-			statement.setString(5, this.getModeAppel());
-			statement.setInt(6, this.getVolumeMega());
-			statement.setInt(7, this.getNbSms());
+			statement.setString(1, this.getTypeForfait());
+			statement.setString(2, this.getNomForfait());
+			statement.setInt(3, this.getPrixForfait());
+			statement.setInt(4, this.getDureeForfait());			
+			statement.setInt(5, this.getValeurAppel());
+			statement.setString(6, this.getModeAppel());
+			statement.setInt(7, this.getVolumeMega());
+			statement.setInt(8, this.getNbSms());
 			statement.execute();
 			conn.commit();
 		} catch (Exception ex) {
