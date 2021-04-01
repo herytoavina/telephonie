@@ -153,7 +153,7 @@ public class Utilisateur {
 		Connect con = new Connect();
 		Utilisateur result=new Utilisateur();
 		try {
-		String NUMERO_USER = "select * from UserToken where token="+token;
+		String NUMERO_USER = "select * from UserToken where token='"+ token +"'";
 				Connection c = con.getConnection();
 				PreparedStatement preparedStatement = c.prepareStatement(NUMERO_USER);
 				ResultSet rs = preparedStatement.executeQuery();
