@@ -159,7 +159,7 @@ public class Forfait {
 			PreparedStatement preparedStatement = c.prepareStatement(ALL_FORFAIT);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nomForfait"), rs.getInt("prixForfait"), rs.getInt("dureeForfait"), rs.getInt("valeur_appel"), rs.getString("mode_appel"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
+				result.add(new Forfait(rs.getString("idForfait"), rs.getString("typeForfait"), rs.getString("nomForfait"), rs.getInt("prixForfait"), rs.getInt("dureeForfait"), rs.getInt("valeur_appel"), rs.getString("mode_appel"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
 			}
 			c.close();
 			
@@ -178,7 +178,7 @@ public class Forfait {
 			PreparedStatement preparedStatement = c.prepareStatement(ALL_FORFAIT_USER);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				result.add(new Forfait(rs.getString("idForfait"), rs.getString("nomForfait"), rs.getInt("prixForfait"), rs.getInt("dureeForfait"), rs.getInt("valeur_appel"), rs.getString("mode_appel"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
+				result.add(new Forfait(rs.getString("idForfait"), rs.getString("typeForfait"), rs.getString("nomForfait"), rs.getInt("prixForfait"), rs.getInt("dureeForfait"), rs.getInt("valeur_appel"), rs.getString("mode_appel"), rs.getInt("volume_mega"), rs.getInt("nb_sms")));
 			}
 			c.close();
 			
@@ -187,5 +187,6 @@ public class Forfait {
 		}
 		return result;
 	}
+	
 	
 }
