@@ -39,11 +39,11 @@ public class UtilisateurController {
 		
 	}
 	@PostMapping("/deco")
-	public BuilderResponse deco(@RequestParam(value = "idUtilisateur")String idUtilisateur){
+	public BuilderResponse deco(@RequestBody Utilisateur utilisateur){
 		BuilderResponse response;
 		try {
 		Utilisateur d = new Utilisateur();
-		 d.delete(idUtilisateur);
+		 d.delete(utilisateur.getIdUtilisateur());
         response = new BuilderResponse(new Meta("200","valider"), null);
 		}
 		catch (Exception e) {
@@ -51,7 +51,6 @@ public class UtilisateurController {
             response= new BuilderResponse(new Meta("500","error"),null);
 		}
 		return response;
-		
 	}
 	
 	@PostMapping("/postToken")
