@@ -109,13 +109,13 @@ public class UtilisateurController {
 		return response;
 	}*/
 	
-	@GetMapping("/Validation")
-	public BuilderResponse Validation(@RequestParam(value = "token")String token){
+	@GetMapping("/validationUtilisateur")
+	public BuilderResponse validationUtilisateur(@RequestParam(value = "tok")String tok){
 		BuilderResponse response;
 		try {
 			List<String> result= new ArrayList<String>();
-			Utilisateur d = new Utilisateur();
-			String answer=d.getId(token);
+			//Utilisateur d = new Utilisateur();
+			String answer=new Utilisateur().getId(tok);
 			result.add(answer);
 
         response = new BuilderResponse(new Meta("200","valider"), result);
