@@ -38,12 +38,12 @@ public class UtilisateurController {
 		return response;
 		
 	}
-	@DeleteMapping("/Deconnection")
-	public BuilderResponse Deconnection(@RequestParam(value = "idUtilisateur")String idUtilisateur){
+	@PostMapping("/deco")
+	public BuilderResponse deco(@RequestParam(value = "idUtilisateur")String idUtilisateur){
 		BuilderResponse response;
 		try {
 		Utilisateur d = new Utilisateur();
-		 d.deconnection(idUtilisateur);
+		 d.delete(idUtilisateur);
         response = new BuilderResponse(new Meta("200","valider"), null);
 		}
 		catch (Exception e) {
@@ -53,6 +53,7 @@ public class UtilisateurController {
 		return response;
 		
 	}
+	
 	@PostMapping("/postToken")
 	public BuilderResponse LoginController(@RequestBody Utilisateur utilisateur) {
 		BuilderResponse response;

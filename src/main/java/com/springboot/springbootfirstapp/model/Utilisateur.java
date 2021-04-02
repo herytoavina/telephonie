@@ -168,27 +168,27 @@ public class Utilisateur {
 			return result.idUtilisateur;
 		}
 	 
-	@SuppressWarnings("resource")
-	public void deconnection(String IdUtilisateur) throws SQLException {
-		Connect c = new Connect();
-		Connection conn = null;
-		PreparedStatement statement = null;
-		try {		
-			String delete_deconnection = "delete into UserToken WHERE `IdUtilisateur` ='" +IdUtilisateur+ "'";
-			conn = c.getConnection();
-			conn.setAutoCommit(false);
-			statement = conn.prepareStatement(delete_deconnection);
-			statement.execute();
-			conn.commit();
-		} catch (Exception ex) {
-			conn.rollback();
-			System.out.println(ex);
-		} finally {
-			if(statement != null) statement.close();
-			if(conn != null) conn.close();
+	
+		public void delete(String id) throws SQLException {
+			Connect c = new Connect();
+			Connection conn = null;
+			PreparedStatement statement = null;
+			try {		
+				conn = c.getConnection();
+				conn.setAutoCommit(false);
+				String res= "delete from UserToken WHERE IdUtilisateur ='" + id +"'";
+				statement = conn.prepareStatement(res);
+				System.out.print(res);
+				statement.execute();
+				conn.commit();
+			} catch (Exception ex) {
+				conn.rollback();
+				System.out.println(ex);
+			} finally {
+				if(statement != null) statement.close();
+				if(conn != null) conn.close();
+			}
 		}
-		
-	}
 	private static final String INSERT_SIMULATION = "insert into UserToken(IdUtilisateur) VALUES (?);";
 	public void insert() throws SQLException {
 		Connect c = new Connect();
