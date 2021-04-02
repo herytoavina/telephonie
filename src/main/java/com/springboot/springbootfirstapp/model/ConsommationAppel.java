@@ -72,12 +72,12 @@ public class ConsommationAppel {
 	}
 	
 	public ConsommationAppel getConsommationAppel(String idForfait){
-		final String CONSOMMATION_FORFAIT = "select * from consommationAppel where idForfait='"+idForfait+"'";
+		final String CONSOMMATION_FORFAITS = "select * from consommationAppel where idForfait='"+idForfait+"'";
 		Connect con = new Connect();
 		ConsommationAppel result = new ConsommationAppel();
 		try {
 			Connection c = con.getConnection();
-			PreparedStatement preparedStatement = c.prepareStatement(CONSOMMATION_FORFAIT);
+			PreparedStatement preparedStatement = c.prepareStatement(CONSOMMATION_FORFAITS);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				result = new ConsommationAppel(rs.getString("idForfait"), rs.getInt("valeur_appel"), rs.getInt("valeur_autre"));
