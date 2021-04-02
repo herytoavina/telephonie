@@ -88,7 +88,7 @@ public class AchatForfait {
 		}
 	}
 	
-	private static final String VENTE_FORFAIT = "select nomForfait, count(achatForfait.idForfait) as vente, EXTRACT(MONTH from achatforfait.dateachat) as mois  from achatForfait,forfait where achatForfait.idForfait=forfait.idForfait group by nomForfait,mois ";
+	private static final String VENTE_FORFAIT = "select nomForfait, count(achatForfait.idForfait) as vente, EXTRACT(MONTH from achatforfait.dateachat) as mois  from achatForfait,forfait where achatForfait.idForfait=forfait.idForfait group by nomForfait,mois";
 	public List<AchatForfait> getVenteForfait() {
 		Connect con = new Connect();
 		List<AchatForfait> result = new ArrayList<AchatForfait>();
