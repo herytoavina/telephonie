@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +38,21 @@ public class UtilisateurController {
 		return response;
 		
 	}
-	
+	@DeleteMapping("/Deconnection")
+	public BuilderResponse Deconnection(@RequestParam(value = "idUtilisateur")String idUtilisateur){
+		BuilderResponse response;
+		try {
+		Utilisateur d = new Utilisateur();
+		 d.deconnection(idUtilisateur);
+        response = new BuilderResponse(new Meta("200","valider"), null);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+            response= new BuilderResponse(new Meta("500","error"),null);
+		}
+		return response;
+		
+	}
 	@PostMapping("/postToken")
 	public BuilderResponse LoginController(@RequestBody Utilisateur utilisateur) {
 		BuilderResponse response;

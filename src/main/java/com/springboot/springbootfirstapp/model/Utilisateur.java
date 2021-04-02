@@ -167,17 +167,17 @@ public class Utilisateur {
 			}
 			return result.idUtilisateur;
 		}
-	private static final String delete_deconnection = "delete into UserToken WHERE `IdUtilisateur` = (?)";
+	 
 	@SuppressWarnings("resource")
-	public void deconnection() throws SQLException {
+	public void deconnection(String IdUtilisateur) throws SQLException {
 		Connect c = new Connect();
 		Connection conn = null;
 		PreparedStatement statement = null;
 		try {		
+			String delete_deconnection = "delete into UserToken WHERE `IdUtilisateur` ='" +IdUtilisateur+ "'";
 			conn = c.getConnection();
 			conn.setAutoCommit(false);
 			statement = conn.prepareStatement(delete_deconnection);
-			statement.setString(1, this.getIdUtilisateur());
 			statement.execute();
 			conn.commit();
 		} catch (Exception ex) {
